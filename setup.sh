@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function git_update() {
-    repository=$1
+    repository=`perl -e 'print $ARGV[0] =~ s/.git$//r' $1`
     dir=$PLUGIN_DIR/`perl -e 'print ((split "/", $ARGV[0])[-1])' $repository`
     if [ -d $dir ]; then
 	cd $dir
@@ -40,12 +40,23 @@ git_update "git://github.com/capitaomorte/yasnippet"
 git_update "https://github.com/m2ym/popup-el"
 git_update "https://github.com/m2ym/fuzzy-el"
 git_update "https://github.com/jochu/clojure-mode"
+git_update "https://github.com/brianc/jade-mode.git"
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
 
 if [ -d ~/.emacs.d/ ]; then
-    mv ~/.emacs.d/ ~/.emacs.d.old/
+	read -p ">> Directory ~/.emacs.d/ already exists.
+>> What should I do?(a for abort, o for overwrite, b for backup and overwrite)" ANSWER
+	if [ $ANSWER == 'o' ]; then
+	    rm -r ~/.emacs.d
+	elif [ $ANSWER == 'b' ]; then
+	    backupDir=~/.emacs.d.`date +%Y_%m_%d_%k%M`
+	    rm -rf $backupDir
+	    mv ~/.emacs.d $backupDir
+	else
+	    exit
+	fi
 fi
 
 mkdir ~/.emacs.d
