@@ -8,5 +8,6 @@ The plugins include:
 * yasnippet mode
 * graphviz-dot mode
 * clojoure mode
-
-
+* jade mode
+* coffee mode
+* markdown mode
