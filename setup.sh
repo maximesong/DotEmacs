@@ -72,7 +72,7 @@ if [ -d ~/.emacs.d/ ]; then
 fi
 
 mkdir ~/.emacs.d
-cp -r $PLUGIN_DIR $ROOT_DIR/dot.el ~/.emacs.d/
+cp -r $PLUGIN_DIR $ROOT_DIR/dot.el $ROOT_DIR/func.el ~/.emacs.d/
 
 echo
 echo "Setup of DotEmacs complete. Enjoy it."
