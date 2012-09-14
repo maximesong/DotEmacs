@@ -88,3 +88,7 @@
 
 ;; set coffee mode
 (require 'coffee-mode)
+
+;; set less mode
+(require 'less-mode)
+(add-to-list 'auto-mode-alist '("\\.less$" . less-mode))

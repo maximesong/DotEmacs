@@ -50,6 +50,8 @@ git_update "https://github.com/jochu/clojure-mode"
 git_update "https://github.com/brianc/jade-mode.git"
 git_update "https://github.com/defunkt/coffee-mode.git"
 git_update "git://jblevins.org/git/markdown-mode.git"
+git_update "https://github.com/myfreeweb/less-mode.git"
+
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
 
