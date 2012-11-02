@@ -42,9 +42,9 @@ echo '(defun my-add-subdirs-to-load-path (dir)
 cd $PLUGIN_DIR
 mkdir -p $MISC_DIR
 
-git_update "https://github.com/m2ym/popup-el"
-git_update "https://github.com/m2ym/fuzzy-el"
-git_update "git://github.com/m2ym/auto-complete"
+git_update "https://github.com/auto-complete/popup-el"
+git_update "https://github.com/auto-complete/fuzzy-el"
+git_update "git://github.com/auto-complete/auto-complete"
 git_update "git://github.com/capitaomorte/yasnippet"
 git_update "https://github.com/jochu/clojure-mode"
 git_update "https://github.com/brianc/jade-mode.git"
