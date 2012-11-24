@@ -55,6 +55,13 @@ git_update "https://github.com/myfreeweb/less-mode.git"
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
 
+if [ ! -f "~/.emacs" ]; then
+	cat > ~/.emacs << EOF
+(load-file "~/.emacs.d/dot.el")
+(load-file "~/.emacs.d/func.el")
+EOF
+fi
+
 if [ -d ~/.emacs.d/ ]; then
 	read -p "
 ## Directory ~/.emacs.d/ already exists.
