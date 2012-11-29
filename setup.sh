@@ -1,5 +1,10 @@
 #!/bin/bash
 
+ROOT_DIR=$PWD
+DOWNLOAD_DIR=$ROOT_DIR/downloads
+PLUGIN_DIR=$ROOT_DIR/plugins
+MISC_DIR=$PLUGIN_DIR/misc
+
 function git_update() {
     repository=`perl -e 'print $ARGV[0] =~ s/.git$//r' $1`
     dir=$PLUGIN_DIR/`perl -e 'print ((split "/", $ARGV[0])[-1])' $repository`
@@ -27,10 +32,30 @@ function file_update() {
     fi
 }
 
-ROOT_DIR=$PWD
-PLUGIN_DIR=$ROOT_DIR/plugins
-MISC_DIR=$PLUGIN_DIR/misc
+function zip_update() {
+    dest_folder=$1
+    url=$2
+    zip_folder=$3
 
+    filename=`perl -e 'print ((split "/", $ARGV[0])[-1])' $url`
+    suffix=${filename##*.}
+
+    cd $DOWNLOAD_DIR
+    file_update $url
+
+    mkdir -p $PLUGIN_DIR/$dest_folder
+
+    if [ $suffix == "gz" ]; then
+	tar zxvf $filename -C $PLUGIN_DIR/$dest_folder
+    fi
+
+    if [ -n $zip_folder ]; then
+	mv $PLUGIN_DIR/$dest_folder/$zip_folder/* $PLUGIN_DIR/$dest_folder
+	rm -r $PLUGIN_DIR/$dest_folder/$zip_folder
+    fi
+}
+
+mkdir -p $DOWNLOAD_DIR
 mkdir -p $PLUGIN_DIR
 
 echo '(defun my-add-subdirs-to-load-path (dir)
@@ -54,11 +79,14 @@ git_update "https://github.com/myfreeweb/less-mode.git"
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
+# zip_update "ibus-mode" "https://launchpad.net/ibus.el/0.3/0.3.2/+download/ibus-el-0.3.2.tar.gz" "ibus-el-0.3.2"
 
 if [ ! -f "~/.emacs" ]; then
 	cat > ~/.emacs << EOF
 (load-file "~/.emacs.d/dot.el")
 (load-file "~/.emacs.d/func.el")
+;; (require 'ibus)
+;; (add-hook 'after-init-hook 'ibus-mode-on)
 EOF
 fi
 
