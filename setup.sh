@@ -82,12 +82,7 @@ file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-
 # zip_update "ibus-mode" "https://launchpad.net/ibus.el/0.3/0.3.2/+download/ibus-el-0.3.2.tar.gz" "ibus-el-0.3.2"
 
 if [ ! -f "~/.emacs" ]; then
-	cat > ~/.emacs << EOF
-(load-file "~/.emacs.d/dot.el")
-(load-file "~/.emacs.d/func.el")
-;; (require 'ibus)
-;; (add-hook 'after-init-hook 'ibus-mode-on)
-EOF
+    cp .emacs ~/
 fi
 
 if [ -d ~/.emacs.d/ ]; then

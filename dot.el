@@ -40,6 +40,7 @@
 	    auto-mode-alist))
 
 ;; set the org-mode
+(global-set-key "\C-ca" 'org-agenda)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((latex . t)
