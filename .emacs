@@ -1,3 +1,4 @@
+(load-file "~/.emacs.d/config.el")
 (load-file "~/.emacs.d/dot.el")
 (load-file "~/.emacs.d/func.el")
 ;; (require 'ibus)

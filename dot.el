@@ -40,6 +40,9 @@
 	    auto-mode-alist))
 
 ;; set the org-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/plugins/org-mode/contrib/lisp")
+
 (global-set-key "\C-ca" 'org-agenda)
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -48,6 +51,13 @@
    (ditaa . t)))
 
 ;; set my org html configuration
+(setq org-publish-project-alist
+      '(("org"
+;; FIXME: property needs to be a string literal
+;;	 :base-directory my_org_source_directory
+	 :base-directory "~/Projects/cppdo/org/"
+	 :publishing-directory my_org_publish_directory)))
+
 (setq org-export-html-style
       (concat
       "<link rel= \"stylesheet\" type=\"text/css\" href=\"assets/css/style.css\" />"

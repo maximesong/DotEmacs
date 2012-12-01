@@ -4,6 +4,7 @@ ROOT_DIR=$PWD
 DOWNLOAD_DIR=$ROOT_DIR/downloads
 PLUGIN_DIR=$ROOT_DIR/plugins
 MISC_DIR=$PLUGIN_DIR/misc
+EL_FILES="$ROOT_DIR/dot.el $ROOT_DIR/func.el $ROOT_DIR/config.el"
 
 function git_update() {
     repository=`perl -e 'print $ARGV[0] =~ s/.git$//r' $1`
@@ -76,6 +77,7 @@ git_update "https://github.com/brianc/jade-mode.git"
 git_update "https://github.com/defunkt/coffee-mode.git"
 git_update "git://jblevins.org/git/markdown-mode.git"
 git_update "https://github.com/myfreeweb/less-mode.git"
+git_update "git://orgmode.org/org-mode.git "
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
@@ -102,7 +104,7 @@ if [ -d ~/.emacs.d/ ]; then
 fi
 
 mkdir ~/.emacs.d
-cp -r $PLUGIN_DIR $ROOT_DIR/dot.el $ROOT_DIR/func.el ~/.emacs.d/
+cp -r $PLUGIN_DIR $EL_FILES ~/.emacs.d/
 
 echo
 echo "Setup of DotEmacs complete. Enjoy it."
