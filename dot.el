@@ -56,13 +56,15 @@
 ;; FIXME: property needs to be a string literal
 ;;	 :base-directory my_org_source_directory
 	 :base-directory "~/Projects/cppdo/org/"
-	 :publishing-directory my_org_publish_directory)))
+	 :publishing-directory my_org_publish_directory
+	 :auto-sitemap t
+	 :sitemap-title "SiteMap一览")))
 
 (setq org-export-default-language "zh-CN")
 
 (setq org-export-html-style
       (concat
-      "<link rel= \"stylesheet\" type=\"text/css\" href=\"assets/css/style.css\" />"
+      "<link rel= \"stylesheet\" type=\"text/css\" href=\"worg.css\" />"
       "<link rel=\"SHORTCUT ICON\" href=\"images/favicon.ico\" type=\"image/x-icon\" />"))
 (setq org-export-html-style-include-default nil)
 (setq org-export-html-postamble t)
