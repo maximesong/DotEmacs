@@ -12,3 +12,9 @@
 				   (string-match ".markdown"
 						 content))
 			".markdown"))))
+
+(defun update-config ()
+  (interactive)
+  (load-file ".emacs"))
+
+(global-set-key "\C-cu" 'update-config)

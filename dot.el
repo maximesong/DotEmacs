@@ -58,6 +58,8 @@
 	 :base-directory "~/Projects/cppdo/org/"
 	 :publishing-directory my_org_publish_directory)))
 
+(setq org-export-default-language "zh-CN")
+
 (setq org-export-html-style
       (concat
       "<link rel= \"stylesheet\" type=\"text/css\" href=\"assets/css/style.css\" />"
