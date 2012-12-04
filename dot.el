@@ -58,6 +58,7 @@
 	 :base-directory "~/Projects/cppdo/org/"
 	 :publishing-directory my_org_publish_directory
 	 :auto-sitemap t
+	 :makeindex t
 	 :sitemap-title "站点地图")))
 
 (setq org-export-default-language "zh-CN")
