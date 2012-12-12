@@ -19,9 +19,12 @@
 
 (global-set-key "\C-cu" 'update-config)
 
-(defun org-insert-export-options-template ()
+(defun my-org-insert-template ()
   (interactive)
+  (org-goto-calendar)
   (let ((cal-date (org-get-date-from-calendar)))
+    (kill-buffer-and-window)
+    (switch-to-buffer (car (org-buffer-list 'files)))
     (insert (format
 	     (concat
 	      "#+TITLE:\n"
@@ -30,3 +33,8 @@
 	     (car cal-date)
 	     (nth 1 cal-date)))))
 
+(add-hook 'org-mode-hook
+	  (lambda () 
+	    (defun org-insert-export-options-template()
+	      (interactive)
+		  (my-org-insert-template))))
