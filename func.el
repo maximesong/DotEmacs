@@ -38,3 +38,7 @@
 	    (defun org-insert-export-options-template()
 	      (interactive)
 		  (my-org-insert-template))))
+
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (setq truncate-lines nil)))
