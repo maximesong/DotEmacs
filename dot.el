@@ -46,7 +46,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((latex . t)
+ '(;(latex . t)
    (dot . t)
    (ditaa . t)))
 
