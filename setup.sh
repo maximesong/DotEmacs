@@ -4,6 +4,7 @@ ROOT_DIR=$PWD
 DOWNLOAD_DIR=$ROOT_DIR/downloads
 PLUGIN_DIR=$ROOT_DIR/plugins
 MISC_DIR=$PLUGIN_DIR/misc
+ORG_DIR=$PLUGIN_DIR/org-mode
 EL_FILES="$ROOT_DIR/dot.el $ROOT_DIR/func.el $ROOT_DIR/config.el"
 
 function git_update() {
@@ -78,6 +79,9 @@ git_update "https://github.com/defunkt/coffee-mode.git"
 git_update "git://jblevins.org/git/markdown-mode.git"
 git_update "https://github.com/myfreeweb/less-mode.git"
 git_update "git://orgmode.org/org-mode.git "
+
+cd $ORG_DIR
+make
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
