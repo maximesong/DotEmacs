@@ -43,7 +43,21 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
 (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/contrib/lisp")
 
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Projects/todo/capture.org" "Tasks")
+	 "* TODO %?\n %i\n %a")))
+
+(setq org-tag-alist '(("urgent" . ?u) ("important" . ?i) ("private" . ?p)))
+
+(setq org-clock-persist t)
+(setq org-clock-into-drawer 2)
+(setq org-agenda-files (list "~/Projects/todo/capture.org"
+			     "~/Projects/todo/todo.org"
+			     "~/Projects/todo/archive.org"))
+
 (global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(;(latex . t)
