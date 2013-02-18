@@ -44,3 +44,18 @@
 	    (setq truncate-lines nil)))
 
      
+(defun try nil
+  (interactive)
+(let ((re (concat "^\\(\\*+\\)[ \t]\\|^[ \t]*"
+		  org-clock-string
+		  "[ \t]*\\(?:\\(\\[.*?\\]\\)-+\\(\\[.*?\\]\\)\\|=>[ \t]+\\([0-9]+\\):\\([0-9]+\\)\\)"))
+      (final-string ""))
+  (save-excursion
+   (while (setq spos (re-search-backward re nil t))
+     (if (match-string 2)
+	 (and (setq ts (match-string 2))
+	     (setq te (match-string 3))
+	     (setq final-string (concat final-string "\n"
+					(nth 4 (org-heading-components)) "\n"
+					"CLOCK: " ts "--" te))))))
+  (message final-string)))
