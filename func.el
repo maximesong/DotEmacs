@@ -49,13 +49,15 @@
 (let ((re (concat "^\\(\\*+\\)[ \t]\\|^[ \t]*"
 		  org-clock-string
 		  "[ \t]*\\(?:\\(\\[.*?\\]\\)-+\\(\\[.*?\\]\\)\\|=>[ \t]+\\([0-9]+\\):\\([0-9]+\\)\\)"))
-      (final-string ""))
+      (final-string "")
+      unsorted-list)
   (save-excursion
    (while (setq spos (re-search-backward re nil t))
      (if (match-string 2)
 	 (and (setq ts (match-string 2))
-	     (setq te (match-string 3))
-	     (setq final-string (concat final-string "\n"
-					(nth 4 (org-heading-components)) "\n"
-					"CLOCK: " ts "--" te))))))
-  (message final-string)))
+	      (setq te (match-string 3))
+	      (setq heading (nth 4 (org-heading-components)))
+	      (setq unsorted-list (cons (list ts te heading) unsorted-list))))))
+  (setq sorted-list (sort unsorted-list (lambda (a b) (string< (car a) (car b)))))
+  (dolist (entry sorted-list)
+    (message (concat "** " (nth 2 entry) "\n" (nth 0 entry) "--" (nth 1 entry) "\n")))))
