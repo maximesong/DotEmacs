@@ -48,7 +48,7 @@
 	 "* TODO %?\n %i\n %a")))
 
 (setq org-tag-alist '(("urgent" . ?u) ("important" . ?i) ("private" . ?p)
-		      ("fun" . ?f)))
+		      ("fun" . ?f) ("explore" . ?e)))
 
 (setq org-clock-persist t)
 (setq org-clock-into-drawer 2)
