@@ -85,6 +85,7 @@ make
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
+file_update "http://www.emacswiki.org/emacs/csharp-mode.el"
 # zip_update "ibus-mode" "https://launchpad.net/ibus.el/0.3/0.3.2/+download/ibus-el-0.3.2.tar.gz" "ibus-el-0.3.2"
 
 cd $ROOT_DIR

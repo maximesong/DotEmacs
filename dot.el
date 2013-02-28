@@ -139,3 +139,8 @@
 ;; set less mode
 (require 'less-mode)
 (add-to-list 'auto-mode-alist '("\\.less$" . less-mode))
+
+;; csharp-mode
+(autoload 'csharp-mode "csharp-mode.el" "Major mode for editing C# code." t)
+(setq auto-mode-alist
+      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
