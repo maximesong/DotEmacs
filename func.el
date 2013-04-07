@@ -61,3 +61,15 @@
   (setq sorted-list (sort unsorted-list (lambda (a b) (string< (car a) (car b)))))
   (dolist (entry sorted-list)
     (message (concat "** " (nth 2 entry) "\n" (nth 0 entry) "--" (nth 1 entry) "\n")))))
+
+(defun opcode-recursive(text opcode from to)
+  (insert "|" text (number-to-string  from) "|" (number-to-string opcode) "|\n")
+  (if (equal from to)
+      nil
+    (opcode-recursive text (+ opcode 1) (+ from 1) to)
+  ))
+
+(defun opcode-table()
+  (interactive)
+  (opcode-recursive (read-string "Base Operation: ") (read-number "Base Opcode: ")
+		    (read-number "From: ") (read-number "To: ")))
