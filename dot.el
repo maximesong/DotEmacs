@@ -144,3 +144,34 @@
 (autoload 'csharp-mode "csharp-mode.el" "Major mode for editing C# code." t)
 (setq auto-mode-alist
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+
+
+;; llvm style for llvm related source file
+(c-add-style "llvm.org"
+             '((fill-column . 80)
+	       (c++-indent-level . 2)
+	       (c-basic-offset . 2)
+	       (indent-tabs-mode . nil)
+               (c-offsets-alist . ((innamespace 0)))))
+
+;; Only files with "llvm" in
+;; their names will automatically set to the llvm.org coding style.
+(add-hook 'c-mode-hook
+	  (function
+	   (lambda nil 
+	     (if (string-match "llvm" buffer-file-name)
+		 (progn
+		   (c-set-style "llvm.org")
+		   )
+	       ))))
+
+(add-hook 'c++-mode-hook
+	  (function
+	   (lambda nil 
+	     (if (string-match "llvm" buffer-file-name)
+		 (progn
+		   (c-set-style "llvm.org")
+		   )
+	       ))))
+;; require llvm mode for llvm assembly highlighting
+(require 'llvm-mode)
