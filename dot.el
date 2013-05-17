@@ -44,6 +44,8 @@
 ;; set the org-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/lisp")
 (add-to-list 'load-path "~/.emacs.d/plugins/org-mode/contrib/lisp")
+;; otherwise, it is not auto-loaded when start emacs
+(load-file "~/.emacs.d/plugins/org-mode/lisp/org-clock.el")
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/Projects/todo/capture.org" "Tasks")
