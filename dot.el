@@ -1,3 +1,5 @@
+(setq debug-on-error t)
+
 (custom-set-variables
  ;; disable tool bar
  '(tool-bar-mode nil)
@@ -72,21 +74,21 @@
 ;;	 :base-directory my_org_source_directory
 	 :base-directory "~/Projects/cppdo/org/"
 	 :publishing-directory my-org-publish-directory
+	 :publishing-function org-html-publish-to-html
 	 :auto-sitemap t
 	 :makeindex t
 	 :link-home "http://www.cppdo.com/wiki/sitemap.html"
 	 :link-up "http://www.cppdo.com"
-	 :sitemap-title "站点地图")))
+	 :sitemap-title "站点地图"
+	 :language "zh-CN")))
 
-(setq org-export-default-language "zh-CN")
+(setq org-default-language "zh-CN")
 
-(setq org-export-html-style
-      (concat
-      "<link rel= \"stylesheet\" type=\"text/css\" href=\"worg.css\" />"
-      "<link rel=\"SHORTCUT ICON\" href=\"images/favicon.ico\" type=\"image/x-icon\" />"))
-(setq org-export-html-style-include-default nil)
-(setq org-export-html-postamble t)
-(setq org-export-html-postamble-format 
+(setq org-html-head
+      "<link rel= \"stylesheet\" type=\"text/css\" href=\"worg.css\" /><link rel=\"SHORTCUT ICON\" href=\"images/favicon.ico\" type=\"image/x-icon\" />")
+(setq org-html-style-include-default nil)
+(setq org-html-postamble t)
+(setq org-html-postamble-format 
       '(("en" "<div id=\"postamble-info\"><p class=\"author\">作者: %a (%e)</p>\n<p class=\"date\">更新日期: %d</p>\n</div><div hidden=\"True\" style=\"display:none\"><script language=\"javascript\" type=\"text/javascript\" src=\"http://js.users.51.la/15248666.js\"></script></div><div id=\"disqus-frame\"><div id=\"disqus_thread\"></div>
     <script type=\"text/javascript\">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -159,7 +161,8 @@
 (add-hook 'c-mode-hook
 	  (function
 	   (lambda nil 
-	     (if (string-match "llvm" buffer-file-name)
+	     (if (and buffer-file-name
+		      (string-match "llvm" buffer-file-name))
 		 (progn
 		   (c-set-style "llvm.org")
 		   )
@@ -168,10 +171,18 @@
 (add-hook 'c++-mode-hook
 	  (function
 	   (lambda nil 
-	     (if (string-match "llvm" buffer-file-name)
+	     (if (and buffer-file-name
+		      (string-match "llvm" buffer-file-name))
 		 (progn
 		   (c-set-style "llvm.org")
 		   )
 	       ))))
 ;; require llvm mode for llvm assembly highlighting
 (require 'llvm-mode)
+
+;; cmake-mode
+(require 'cmake-mode)
+(setq auto-mode-alist
+      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
+		("\\.cmake\\'" . cmake-mode))
+	      auto-mode-alist))

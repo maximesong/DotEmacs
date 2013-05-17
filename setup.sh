@@ -91,6 +91,8 @@ file_update "http://www.emacswiki.org/emacs/csharp-mode.el"
 file_update "http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/llvm-mode.el"
 file_update "http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/tablegen-mode.el"
 
+file_update "http://www.cmake.org/CMakeDocs/cmake-mode.el"
+
 cd $ROOT_DIR
 if [ ! -f "~/.emacs" ]; then
     cp .emacs ~/
