@@ -62,6 +62,18 @@
   (dolist (entry sorted-list)
     (message (concat "** " (nth 2 entry) "\n" (nth 0 entry) "--" (nth 1 entry) "\n")))))
 
+(defun opcode-recursive(text opcode from to)
+  (insert "|" text (number-to-string  from) "|" (number-to-string opcode) "|\n")
+  (if (equal from to)
+      nil
+    (opcode-recursive text (+ opcode 1) (+ from 1) to)
+  ))
+
+(defun opcode-table()
+  (interactive)
+  (opcode-recursive (read-string "Base Operation: ") (read-number "Base Opcode: ")
+		    (read-number "From: ") (read-number "To: ")))
+
 ;; used by org-clock-sum-today-by-tags
 (defun filter-by-tags ()
    (let ((head-tags (org-get-tags-at)))
@@ -71,7 +83,8 @@
   (interactive "P")
   (let* ((timerange-numeric-value (prefix-numeric-value timerange))
          (files (org-add-archive-files (org-agenda-files)))
-         (include-tags '("urgent" "important" "fun" "explore"))
+         (include-tags '("academic" "potential" "exercise" "work"
+                         "routinue" "entertainment" "fun"))
          (tags-time-alist (mapcar (lambda (tag) `(,tag . 0)) include-tags))
          (output-string "")
          (tstart (or tstart
@@ -104,3 +117,5 @@
     output-string))
 
 (global-set-key "\C-cz" 'org-clock-sum-today-by-tags)
+;; (setq week-range (org-clock-special-range 'thisweek nil t))
+;; (org-clock-sum-today-by-tags nil (nth 0 week-range) (nth 1 week-range) t)

@@ -85,7 +85,13 @@ make
 
 cd $MISC_DIR
 file_update "http://users.skynet.be/ppareit/projects/graphviz-dot-mode/graphviz-dot-mode.el"
+file_update "http://www.emacswiki.org/emacs/csharp-mode.el"
 # zip_update "ibus-mode" "https://launchpad.net/ibus.el/0.3/0.3.2/+download/ibus-el-0.3.2.tar.gz" "ibus-el-0.3.2"
+
+file_update "http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/llvm-mode.el"
+file_update "http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/tablegen-mode.el"
+
+file_update "http://www.cmake.org/CMakeDocs/cmake-mode.el"
 
 cd $ROOT_DIR
 if [ ! -f "~/.emacs" ]; then
