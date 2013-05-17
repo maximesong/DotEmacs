@@ -7,3 +7,4 @@
 (setq my-org-up-url "http://www.cppdo.com/wiki/sitemap.html")
 (setq user-mail-address "me@cppdo.com")
 (setq user-full-name "Song Wenhao")
+(setq org-export--default-title "TITLE")
