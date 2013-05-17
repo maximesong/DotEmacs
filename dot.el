@@ -49,7 +49,8 @@
       '(("t" "Todo" entry (file+headline "~/Projects/todo/capture.org" "Tasks")
 	 "* TODO %?\n %i\n %a")))
 
-(setq org-tag-alist '(("urgent" . ?u) ("important" . ?i) ("private" . ?p)
+(setq org-tag-alist '(("academic" . ?a) ("potential" . ?p) ("work" . ?w)
+		      ("routinue" . ?r) ("entertainment" . ?p)
 		      ("fun" . ?f)))
 
 (setq org-clock-persist t)
