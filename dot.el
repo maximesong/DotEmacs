@@ -1,5 +1,3 @@
-(setq debug-on-error t)
-
 (custom-set-variables
  ;; disable tool bar
  '(tool-bar-mode nil)
@@ -49,9 +47,8 @@
       '(("t" "Todo" entry (file+headline "~/Projects/todo/capture.org" "Tasks")
 	 "* TODO %?\n %i\n %a")))
 
-(setq org-tag-alist '(("academic" . ?a) ("potential" . ?p) ("misc" . ?m)
-		      ("routinue" . ?r) ("entertainment" . ?e)
-		      ("fun" . ?f)))
+(setq org-tag-alist '(("urgent" . ?u) ("important" . ?i) ("private" . ?p)
+		      ("fun" . ?f) ("explore" . ?e)))
 
 (setq org-clock-persist t)
 (setq org-clock-into-drawer 2)
@@ -75,21 +72,21 @@
 ;;	 :base-directory my_org_source_directory
 	 :base-directory "~/Projects/cppdo/org/"
 	 :publishing-directory my-org-publish-directory
-	 :publishing-function org-html-publish-to-html
 	 :auto-sitemap t
 	 :makeindex t
 	 :link-home "http://www.cppdo.com/wiki/sitemap.html"
 	 :link-up "http://www.cppdo.com"
-	 :sitemap-title "站点地图"
-	 :language "zh-CN")))
+	 :sitemap-title "站点地图")))
 
-(setq org-default-language "zh-CN")
+(setq org-export-default-language "zh-CN")
 
-(setq org-html-head
-      "<link rel= \"stylesheet\" type=\"text/css\" href=\"worg.css\" /><link rel=\"SHORTCUT ICON\" href=\"images/favicon.ico\" type=\"image/x-icon\" />")
-(setq org-html-style-include-default nil)
-(setq org-html-postamble t)
-(setq org-html-postamble-format 
+(setq org-export-html-style
+      (concat
+      "<link rel= \"stylesheet\" type=\"text/css\" href=\"worg.css\" />"
+      "<link rel=\"SHORTCUT ICON\" href=\"images/favicon.ico\" type=\"image/x-icon\" />"))
+(setq org-export-html-style-include-default nil)
+(setq org-export-html-postamble t)
+(setq org-export-html-postamble-format 
       '(("en" "<div id=\"postamble-info\"><p class=\"author\">作者: %a (%e)</p>\n<p class=\"date\">更新日期: %d</p>\n</div><div hidden=\"True\" style=\"display:none\"><script language=\"javascript\" type=\"text/javascript\" src=\"http://js.users.51.la/15248666.js\"></script></div><div id=\"disqus-frame\"><div id=\"disqus_thread\"></div>
     <script type=\"text/javascript\">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -142,48 +139,3 @@
 ;; set less mode
 (require 'less-mode)
 (add-to-list 'auto-mode-alist '("\\.less$" . less-mode))
-
-;; csharp-mode
-(autoload 'csharp-mode "csharp-mode.el" "Major mode for editing C# code." t)
-(setq auto-mode-alist
-      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
-
-
-;; llvm style for llvm related source file
-(c-add-style "llvm.org"
-             '((fill-column . 80)
-	       (c++-indent-level . 2)
-	       (c-basic-offset . 2)
-	       (indent-tabs-mode . nil)
-               (c-offsets-alist . ((innamespace 0)))))
-
-;; Only files with "llvm" in
-;; their names will automatically set to the llvm.org coding style.
-(add-hook 'c-mode-hook
-	  (function
-	   (lambda nil 
-	     (if (and buffer-file-name
-		      (string-match "llvm" buffer-file-name))
-		 (progn
-		   (c-set-style "llvm.org")
-		   )
-	       ))))
-
-(add-hook 'c++-mode-hook
-	  (function
-	   (lambda nil 
-	     (if (and buffer-file-name
-		      (string-match "llvm" buffer-file-name))
-		 (progn
-		   (c-set-style "llvm.org")
-		   )
-	       ))))
-;; require llvm mode for llvm assembly highlighting
-(require 'llvm-mode)
-
-;; cmake-mode
-(require 'cmake-mode)
-(setq auto-mode-alist
-      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
-		("\\.cmake\\'" . cmake-mode))
-	      auto-mode-alist))

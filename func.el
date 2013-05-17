@@ -62,18 +62,6 @@
   (dolist (entry sorted-list)
     (message (concat "** " (nth 2 entry) "\n" (nth 0 entry) "--" (nth 1 entry) "\n")))))
 
-(defun opcode-recursive(text opcode from to)
-  (insert "|" text (number-to-string  from) "|" (number-to-string opcode) "|\n")
-  (if (equal from to)
-      nil
-    (opcode-recursive text (+ opcode 1) (+ from 1) to)
-  ))
-
-(defun opcode-table()
-  (interactive)
-  (opcode-recursive (read-string "Base Operation: ") (read-number "Base Opcode: ")
-		    (read-number "From: ") (read-number "To: ")))
-
 ;; used by org-clock-sum-today-by-tags
 (defun filter-by-tags ()
    (let ((head-tags (org-get-tags-at)))
@@ -83,8 +71,7 @@
   (interactive "P")
   (let* ((timerange-numeric-value (prefix-numeric-value timerange))
          (files (org-add-archive-files (org-agenda-files)))
-         (include-tags '("academic" "potential" "exercise" "work"
-                         "routinue" "entertainment" "fun"))
+         (include-tags '("urgent" "important" "fun" "explore"))
          (tags-time-alist (mapcar (lambda (tag) `(,tag . 0)) include-tags))
          (output-string "")
          (tstart (or tstart
@@ -111,11 +98,21 @@
               m (- (cdr item) (* 60 h)))
         (setq output-string (concat output-string (format "[-%s-] %.2d:%.2d\n" (car item) h m)))))
     (unless donesomething
-      (setq output-string (concat output-string "[-Nothing-] Done nothing!!!\n")))
+      (setq output-string (concat output-string "[-Nothing-]\n")))
     (unless noinsert
         (insert output-string))
     output-string))
 
+(defun org-clock-tag-statistics ()
+  (interactive)
+  (switch-to-buffer (generate-new-buffer "*statics*"))
+  (insert "Week:\n")
+;;  (setq week-range (org-clock-special-range 'thisweek nil t))
+  (goto-char (point-max))
+  (org-clock-sum-today-by-tags nil)
+  (goto-char (point-max))
+  (insert "\nToday:\n")
+  (org-clock-sum-today-by-tags nil)
+)
+
 (global-set-key "\C-cz" 'org-clock-sum-today-by-tags)
-;; (setq week-range (org-clock-special-range 'thisweek nil t))
-;; (org-clock-sum-today-by-tags nil (nth 0 week-range) (nth 1 week-range) t)
