@@ -83,8 +83,8 @@
   (interactive "P")
   (let* ((timerange-numeric-value (prefix-numeric-value timerange))
          (files (org-add-archive-files (org-agenda-files)))
-         (include-tags '("academic" "potential" "exercise" "work"
-                         "routinue" "entertainment" "fun"))
+         (include-tags '("academic" "potential"  "work"
+                         "routinue" "entertainment" "fun" "sports"))
          (tags-time-alist (mapcar (lambda (tag) `(,tag . 0)) include-tags))
          (output-string "")
          (tstart (or tstart

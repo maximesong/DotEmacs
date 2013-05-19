@@ -52,7 +52,8 @@
 	 "* TODO %?\n %i\n %a")))
 
 (setq org-tag-alist '(("academic" . ?a) ("potential" . ?p) ("misc" . ?m)
-		      ("routinue" . ?r) ("entertainment" . ?e)
+		      ("routinue" . ?r) ("entertainment" . ?e) ("sports" . ?s)
+		      ("work" . ?w)
 		      ("fun" . ?f)))
 
 (setq org-clock-persist t)
