@@ -104,9 +104,11 @@
           (org-clock-sum tstart tend 'filter-by-tags)
           (setcdr (assoc current-tag tags-time-alist)
                   (+ org-clock-file-total-minutes (cdr (assoc current-tag tags-time-alist)))))))
+    (setq total-minutes 0)
     (while (setq item (pop tags-time-alist))
       (unless (equal (cdr item) 0)
         (setq donesomething t)
+	(setq total-minutes (+ total-minutes (cdr item)))
         (setq h (/ (cdr item) 60)
               m (- (cdr item) (* 60 h)))
         (setq output-string (concat output-string (format "[-%s-] %.2d:%.2d\n" (car item) h m)))))
@@ -114,7 +116,7 @@
       (setq output-string (concat output-string "[-Nothing-]\n")))
     (unless noinsert
         (insert output-string))
-    output-string))
+    (cons total-minutes output-string)))
 
 (defun org-clock-tag-statistics ()
   (interactive)
@@ -127,13 +129,24 @@
 			   86400)))
 	 (week-end (+ week-start (* 7 86400))))
     (switch-to-buffer (generate-new-buffer "*statics*"))
-    (insert "Week:\n")
+    (insert "Week: "
+	    (minutes-to-time-string
+	     (car (org-clock-sum-today-by-tags nil week-start week-end t)))
+	    "\n")
     (goto-char (point-max))
     (org-clock-sum-today-by-tags nil week-start week-end)
     (goto-char (point-max))
-    (insert "\nToday:\n")
+    (insert "\nToday: "
+	    (minutes-to-time-string
+	     (car (org-clock-sum-today-by-tags nil nil nil t)))
+	    "\n")
     (org-clock-sum-today-by-tags nil)
     (setq buffer-read-only t)))
 
-
+(defun minutes-to-time-string (total-minutes)
+  (let* ((hour (/ total-minutes  60))
+	 (minutes (- total-minutes (* 60 hour))))
+    (format "%.2d:%.2d" hour minutes)
+    ))
+    
 (global-set-key "\C-cz" 'org-clock-tag-statistics)
